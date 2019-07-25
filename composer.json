@@ -1,0 +1,25 @@
+{
+  "name": "yjtec/laravel-rbac",
+  "description": "yjtec laravel rbac",
+  "type": "library",
+  "license": "MIT",
+  "authors": [{
+    "name": "kidkang",
+    "email": "723616880@qq.com"
+  }],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Yjtec\\Rbac\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Yjtec\\Rbac\\Providers\\RbacServiceProvider",
+        "Yjtec\\Rbac\\Providers\\RouteServiceProvider"
+      ]
+    }
+  }
+}
