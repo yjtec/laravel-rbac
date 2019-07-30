@@ -14,6 +14,12 @@ class RbacServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations'),
+            __DIR__.'/../database/seeds/' => database_path('seeds'),
+        ]);
     }
 
     /**
@@ -25,5 +31,6 @@ class RbacServiceProvider extends ServiceProvider
     {
         $this->app->bind('Yjtec\Rbac\Repositories\Contracts\RoleInterface', 'Yjtec\Rbac\Repositories\Eloquent\RoleRepository');
         $this->app->bind('Yjtec\Rbac\Repositories\Contracts\AccessInterface', 'Yjtec\Rbac\Repositories\Eloquent\AccessRepository');
+        $this->app->bind('Yjtec\Rbac\Repositories\Contracts\MenuInterface', 'Yjtec\Rbac\Repositories\Eloquent\MenuRepository');
     }
 }

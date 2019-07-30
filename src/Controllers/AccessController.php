@@ -45,7 +45,7 @@ class AccessController extends Controller
     public function index(Request $request)
     {
         $type = \Request::input('type');
-        $data = $this->repo->list(['app_id'=>\Request::input('app_id')]);
+        $data = $this->repo->list([]);
         if($type == 'nested'){
             return \Yjtec\Support\Nested::unlimitedForlayer($data->toArray(),'children');
         }        

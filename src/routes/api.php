@@ -11,4 +11,10 @@ Route::post('/access','AccessController@store'); //新增权限
 Route::get('/access/{access}','RoleController@show');//获取当前角色
 Route::put('/access/{access}','AccessController@update'); //修改权限
 Route::delete('/access/{access}','AccessController@destory'); //删除权限
+
+Route::get('/menu','MenuController@index');//菜单列表
+Route::post('/menu','MenuController@store');//新增菜单
+Route::get('/menu/{menu}','MenuController@show');//获取当前菜单
+Route::put('/menu/{menu}','MenuController@update');//修改当前菜单
+Route::delete('/menu/{menu}','MenuController@destory');//删除菜单
 ?>
