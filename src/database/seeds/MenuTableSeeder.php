@@ -18,5 +18,6 @@ class MenuTableSeeder extends Seeder
             ['title' => '权限管理','name'=>'access','path'=>'/rbac/access','icon'=>'rbac','pid'=>2,'access_id'=>4],
             ['title' => '菜单管理','name'=>'menu','path'=>'/rbac/menu','icon'=>'menu','pid'=>2,'access_id'=>5],
         ];
+        \Yjtec\Rbac\Models\Menu::insert($data);
     }
 }

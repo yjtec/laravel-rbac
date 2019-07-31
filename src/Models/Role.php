@@ -12,6 +12,7 @@ class Role extends Model
     }
 
     public function accesses(){
-        return $this->belongsToMany('App\Models\Access','role_access');
+        return $this->belongsToMany('Yjtec\Rbac\Models\Access','role_access');
     }
+
 }

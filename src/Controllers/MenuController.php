@@ -41,8 +41,13 @@ class MenuController extends Controller
      *     )
      * )
      */    
-    public function index(){
-        return $this->repo->list([]);
+    public function index(Request $reuqest){
+        $type = $reuqest->input('type');
+        $data = $this->repo->list([]);        
+        if($type == 'nested'){
+            return \Yjtec\Support\Nested::unlimitedForlayer($data->toArray(),'children');
+        }        
+        return $data;
     }
 
     /**
@@ -123,5 +128,33 @@ class MenuController extends Controller
      */    
     public function destory($menu,DestoryRequest $request){
         $menu->delete() ? tne('SUCCESS') : tne('FAIL');
-    }    
+    }
+    /**
+     * @OA\Delete(
+     *     path="/menu/",
+     *     description="批量删除菜单",
+     *     tags={"Menu"},
+     *     summary="删除菜单",
+     *     operationId="ApiMenuMulDelete",
+     *     @OA\Parameter(
+     *         name="ids[]",
+     *         in="query",
+     *         description="选择IDs",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="array",
+     *           @OA\Items(type="string"),
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="删除成功",
+     *     )
+     * )
+     */
+    public function mulDestory(Request $request){
+        $ids = $request->input('ids');
+        $this->repo->mulDelete($ids) ? tne('SUCCESS') : tne("FAIL");
+    }
 }

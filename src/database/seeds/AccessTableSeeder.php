@@ -16,42 +16,36 @@ class AccessTableSeeder extends Seeder
             [
                 'title' => '后台应用',
                 'name' => 'Admin',
-                'app_id' => $appId,
                 'level' => 1,
                 'children' => [
                     [
                         'title' => '用户管理',
                         'name' => 'User',
-                        'app_id'=>$appId,
                         'level' => 2,
                         'children' => [
                             [
                                 'title'=>'用户列表',
                                 'name' => 'List',
-                                'app_id' => $appId,
                                 'level' => 3,
                                 'children' => [
-                                    ['title' => '新增用户','name' =>'add','app_id'=>$appId,'level' => 4],
-                                    ['title' => '删除用户','name' =>'delete','app_id'=>$appId,'level' => 4],
-                                    ['title' => '编辑用户','name' =>'edit','app_id'=>$appId,'level'=>4],
+                                    ['title' => '新增用户','name' =>'add','level' => 4],
+                                    ['title' => '删除用户','name' =>'delete','level' => 4],
+                                    ['title' => '编辑用户','name' =>'edit','level'=>4],
                                 ]
                             ],
                             [
                                 'title' => '编辑用户',
                                 'name' => 'Edit',
-                                'app_id' => $appId,
                                 'level' => 3
                             ],
                             [
                                 'title' => '新增用户',
                                 'name' => 'Add',
-                                'app_id' => $appId,
                                 'level' => 3
                             ],
                             [
                                 'title' => '删除用户',
                                 'name' => 'DELETE',
-                                'app_id' => $appId,
                                 'level' => 3
                             ]
                         ]
@@ -59,35 +53,30 @@ class AccessTableSeeder extends Seeder
                     [
                         'title' => '角色管理',
                         'name' => 'Role',
-                        'app_id' => $appId,
                         'children' => [
                             [
                                 'title'=>'角色列表',
                                 'name' => 'List',
-                                'app_id' => $appId,
                                 'level' => 3,
                                 'children' => [
-                                    ['title' => '新增角色','name' =>'add','app_id'=>$appId,'level' => 4],
-                                    ['title' => '删除角色','name' =>'delete','app_id'=>$appId,'level' => 4],
-                                    ['title' => '编辑角色','name' =>'edit','app_id'=>$appId,'level' => 4],
+                                    ['title' => '新增角色','name' =>'add','level' => 4],
+                                    ['title' => '删除角色','name' =>'delete','level' => 4],
+                                    ['title' => '编辑角色','name' =>'edit','level' => 4],
                                 ]
                             ],
                             [
                                 'title' => '编辑角色',
                                 'name' => 'Edit',
-                                'app_id' => $appId,
                                 'level' => 3,
                             ],
                             [
                                 'title' => '新增角色',
                                 'name' => 'Add',
-                                'app_id' => $appId,
                                 'level' => 3,
                             ],
                             [
                                 'title' => '删除角色',
                                 'name' => 'DELETE',
-                                'app_id' => $appId,
                                 'level' => 3
                             ]
                         ]
@@ -95,36 +84,31 @@ class AccessTableSeeder extends Seeder
                     [
                         'title' => '权限管理',
                         'name' => 'Access',
-                        'app_id' => $appId,
                         'level' => 2,
                         'children' => [
                             [
                                 'title'=>'权限列表',
                                 'name' => 'List',
-                                'app_id' => $appId,
                                 'level' => 3,
                                 'children' => [
-                                    ['title' => '新增权限','name' =>'add','app_id'=>$appId,'level' => 4],
-                                    ['title' => '删除权限','name' =>'delete','app_id'=>$appId,'level' => 4],
-                                    ['title' => '编辑权限','name' =>'edit','app_id'=>$appId,'level' => 4],
+                                    ['title' => '新增权限','name' =>'add','level' => 4],
+                                    ['title' => '删除权限','name' =>'delete','level' => 4],
+                                    ['title' => '编辑权限','name' =>'edit','level' => 4],
                                 ]
                             ],
                             [
                                 'title' => '编辑权限',
                                 'name' => 'Edit',
-                                'app_id' => $appId,
                                 'level' => 3
                             ],
                             [
                                 'title' => '新增权限',
                                 'name' => 'Add',
-                                'app_id' => $appId,
                                 'level' => 3
                             ],
                             [
                                 'title' => '删除权限',
                                 'name' => 'DELETE',
-                                'app_id' => $appId,
                                 'level' => 3
                             ]
                         ]
@@ -141,13 +125,13 @@ class AccessTableSeeder extends Seeder
                 $children = $v['children'];
                 unset($v['children']);
                 $v['pid'] = $pid;
-                $access = App\Models\Access::create($v);
+                $access = Yjtec\Rbac\Models\Access::create($v);
                 $data = $children;
                 //$access->child()->createMany($children);
                 $this->do($data,$access->id);
             }else{
                 $v['pid'] = $pid;
-                $access = App\Models\Access::create($v);
+                $access = Yjtec\Rbac\Models\Access::create($v);
             }
         }
         

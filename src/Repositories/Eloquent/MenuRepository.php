@@ -17,4 +17,8 @@ class MenuRepository extends Repository implements MenuInterface
         // TODO: Implement model() method.
         return Menu::class;
     }
+
+    public function mulDelete($ids){
+        return $this->model->destroy($ids);
+    }
 }

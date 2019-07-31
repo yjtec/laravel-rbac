@@ -17,4 +17,5 @@ Route::post('/menu','MenuController@store');//新增菜单
 Route::get('/menu/{menu}','MenuController@show');//获取当前菜单
 Route::put('/menu/{menu}','MenuController@update');//修改当前菜单
 Route::delete('/menu/{menu}','MenuController@destory');//删除菜单
+Route::delete('/menu/','MenuController@mulDestory');//批量删除菜单
 ?>

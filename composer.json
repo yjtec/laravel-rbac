@@ -16,10 +16,10 @@
   },
   "extra": {
     "laravel": {
-      "providers": [
-        "Yjtec\\Rbac\\Providers\\RbacServiceProvider",
-        "Yjtec\\Rbac\\Providers\\RouteServiceProvider"
-      ]
+      "providers": ["Yjtec\\Rbac\\Providers\\RbacServiceProvider", "Yjtec\\Rbac\\Providers\\RouteServiceProvider"],
+      "aliases": {
+        "rbac": "Yjtec\\Rbac\\Facades\\Rbac"
+      }
     }
   }
 }

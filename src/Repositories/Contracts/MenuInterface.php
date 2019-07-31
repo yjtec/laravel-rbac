@@ -15,5 +15,5 @@ namespace Yjtec\Rbac\Repositories\Contracts;
  */
 interface MenuInterface
 {
-    
+    public function mulDelete($ids);
 }
