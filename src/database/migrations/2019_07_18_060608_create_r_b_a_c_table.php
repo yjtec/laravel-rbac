@@ -17,6 +17,7 @@ class CreateRBACTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('角色名称');
+            $table->string('name')->comment('标识:英文');
             $table->string('remark')->comment('描述');
             $table->tinyInteger('pid')->default(0)->comment('父级ID 默认为0');
             $table->softDeletes();

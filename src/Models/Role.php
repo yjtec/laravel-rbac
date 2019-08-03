@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['title', 'pid','remark'];
+    protected $fillable = ['title', 'name','pid','remark'];
     public function users(){
-        return $this->belongsToMany('App\Models\User','user_role');
+        return $this->belongsToMany('Yjtec\Rbac\Models\User','user_role');
     }
 
     public function accesses(){

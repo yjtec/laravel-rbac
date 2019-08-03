@@ -26,7 +26,7 @@ class Rbac{
         return[
             'menu'=> $menu,
             'access' => $accesses
-        ]
+        ];
 
         //return $accesses->toArray();
         

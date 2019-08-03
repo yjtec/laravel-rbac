@@ -18,6 +18,7 @@ class StoreRequest extends Request
     {
         return [
             'title'=>'required|min:2|max:10',
+            'name'=>'required|min:2|max:10',
             'remark' => 'required|min:2|max:255',
             'pid'=>"sometimes|numeric"
         ];

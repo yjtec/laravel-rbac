@@ -21,6 +21,7 @@ class Request extends ApiRequest{
     public function attributes(){
         return [
             'title' => '角色名称',
+            'name' => '标识',
             'pid' => '父级ID'
         ];
     }

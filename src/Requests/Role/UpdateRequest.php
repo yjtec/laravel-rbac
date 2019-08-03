@@ -8,6 +8,7 @@ class UpdateRequest extends Request
     {
         return [
             'title' => 'sometimes|min:2|max:255',
+            'name' => 'sometimes|min:2|max:255',
             'remark' => 'sometimes|min:2|max:255',
             'pid' => 'sometimes|numeric'
         ];

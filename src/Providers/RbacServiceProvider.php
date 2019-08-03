@@ -31,6 +31,7 @@ class RbacServiceProvider extends ServiceProvider
         $this->app->bind('Yjtec\Rbac\Repositories\Contracts\RoleInterface', 'Yjtec\Rbac\Repositories\Eloquent\RoleRepository');
         $this->app->bind('Yjtec\Rbac\Repositories\Contracts\AccessInterface', 'Yjtec\Rbac\Repositories\Eloquent\AccessRepository');
         $this->app->bind('Yjtec\Rbac\Repositories\Contracts\MenuInterface', 'Yjtec\Rbac\Repositories\Eloquent\MenuRepository');
+        $this->app->bind('Yjtec\Rbac\Repositories\Contracts\UserInterface', 'Yjtec\Rbac\Repositories\Eloquent\UserRepository');
 
         $this->app->singleton('rbac', function ($app) {
             return new \Yjtec\Rbac\Rbac($app['config']);

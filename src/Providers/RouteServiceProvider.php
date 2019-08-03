@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('role',\Yjtec\Rbac\Models\Role::class);
         Route::model('access',\Yjtec\Rbac\Models\Access::class);
         Route::model('menu',\Yjtec\Rbac\Models\Menu::class);
+        Route::model('user',\Yjtec\Rbac\Models\User::class);
     }
 
     /**
