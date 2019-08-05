@@ -7,6 +7,7 @@ use Yjtec\Rbac\Requests\Menu\DestoryRequest;
 use Yjtec\Rbac\Requests\Menu\UpdateRequest;
 use Yjtec\Rbac\Repositories\Contracts\MenuInterface;
 use Illuminate\Http\Request;
+use Yjtec\Rbac\Resources\Route as RouteResource;
 
 class MenuController extends Controller
 {
@@ -57,10 +58,20 @@ class MenuController extends Controller
      *     tags={"Menu"},
      *     summary="新增菜单",
      *     operationId="ApiMenuStore",
+     *     @OA\Parameter(
+     *         name="roles[]",
+     *         in="query",
+     *         description="选择的角色ID",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="array",
+     *           @OA\Items(type="string"),
+     *         ),
+     *         style="form"
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="新增成功",
-     *
      *     ),
      *     @OA\RequestBody(ref="#/components/requestBodies/StoreMenu"),
      *     security={
@@ -70,7 +81,8 @@ class MenuController extends Controller
      */
     public function store(StoreRequest $request){
         $data = $request->only(['title','name','pid','icon','path','is_show','is_show_children','access_id']);
-        return $this->repo->add($data);
+        $menu = $this->repo->add($data);
+        $menu->roles()->attach($request->input('roles'));
     }
 
     /**
@@ -81,6 +93,17 @@ class MenuController extends Controller
      *     summary="修改菜单",
      *     operationId="ApiMenuUpdate",
      *     @OA\Parameter(ref="#/components/parameters/id"),
+     *     @OA\Parameter(
+     *         name="roles[]",
+     *         in="query",
+     *         description="选择的角色ID",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="array",
+     *           @OA\Items(type="string"),
+     *         ),
+     *         style="form"
+     *     ),
      *     @OA\RequestBody(ref="#/components/requestBodies/StoreMenu"),
      *     @OA\Response(
      *         response="200",
@@ -93,6 +116,10 @@ class MenuController extends Controller
         foreach($data as $k=>$v){
             $menu->$k = $v;
         }
+        if($request->has('roles')){
+            $roles = $request->input('roles');
+            $menu->roles()->sync($roles);
+        }        
         $menu->save() ? tne('SUCCESS') : tne("FAIL");
     }
     /**
@@ -156,5 +183,28 @@ class MenuController extends Controller
     public function mulDestory(Request $request){
         $ids = $request->input('ids');
         $this->repo->mulDelete($ids) ? tne('SUCCESS') : tne("FAIL");
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/routes/",
+     *     description="前端获取菜单",
+     *     tags={"Menu"},
+     *     summary="前端获取菜单",
+     *     operationId="ApiRoutes",
+     *     @OA\Response(
+     *         response="200",
+     *         description="获取成功",
+     *     )
+     * )
+     */    
+    public function routes(Request $request){
+        //$type = $request->input('type');
+        $data = $this->repo->list([]);
+        return RouteResource::collection($data);
+        //return \Yjtec\Support\Nested::unlimitedForlayer($data->toArray(),'routes');
+        
+        //return $data;
+        //return $this->repo->add($data);
     }
 }

@@ -26,6 +26,12 @@ class CreateMenusTable extends Migration
             $table->comment = '菜单表';
             $table->timestamps();
         });
+
+        Schema::create('menu_role', function (Blueprint $table) {
+            $table->integer('menu_id')->comment('菜单ID');
+            $table->integer('role_id')->comment('角色ID');
+            $table->comment = '菜单角色表';
+        });        
     }
 
     /**
@@ -35,6 +41,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('menu_role');
         Schema::dropIfExists('menus');
     }
 }
