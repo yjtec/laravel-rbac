@@ -2,8 +2,6 @@
 
 namespace Yjtec\Rbac\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Access extends Model
 {
     //

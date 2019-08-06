@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection('rbac')->create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('account')->unique()->comment('账号');
             $table->string('avatar')->nullable()->comment('头像');
@@ -36,6 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::connection('rbac')->dropIfExists('users');
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Yjtec\Rbac\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Role extends Model
 {
     protected $fillable = ['title', 'name','pid','remark'];

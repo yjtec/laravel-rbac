@@ -18,6 +18,7 @@ class RbacServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
             __DIR__ . '/../database/seeds/'      => database_path('seeds'),
+            __DIR__ . '/../config/rbac.php'         => config_path('rbac.php'),
         ]);
     }
 

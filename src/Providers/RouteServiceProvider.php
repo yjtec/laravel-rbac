@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::prefix('api')
+        Route::prefix(config('rbac.api_prefix','api'))
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(__DIR__.'/../routes/api.php');

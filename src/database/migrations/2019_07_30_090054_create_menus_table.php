@@ -13,7 +13,7 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::connection('rbac')->create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('菜单名称');
             $table->string('name')->comment('菜单名称');
@@ -27,7 +27,7 @@ class CreateMenusTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('menu_role', function (Blueprint $table) {
+        Schema::connection('rbac')->create('menu_role', function (Blueprint $table) {
             $table->integer('menu_id')->comment('菜单ID');
             $table->integer('role_id')->comment('角色ID');
             $table->comment = '菜单角色表';
@@ -41,7 +41,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_role');
-        Schema::dropIfExists('menus');
+        Schema::connection('rbac')->dropIfExists('menu_role');
+        Schema::connection('rbac')->dropIfExists('menus');
     }
 }
