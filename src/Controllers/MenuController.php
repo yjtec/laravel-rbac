@@ -83,6 +83,7 @@ class MenuController extends Controller
         $data = $request->only(['title','name','pid','icon','path','is_show','is_show_children','access_id']);
         $menu = $this->repo->add($data);
         $menu->roles()->attach($request->input('roles'));
+        return $menu;
     }
 
     /**
@@ -137,6 +138,7 @@ class MenuController extends Controller
      * )
      */
     public function show($menu){
+        $menu->roles_ids = $menu->roles->pluck('id');
         return $menu;
     }
     /**

@@ -14,12 +14,15 @@ class Route extends Resource
      */
     public function toArray($request)
     {
+        //dd($this->roles);
         return [
             'path' => $this->path,
             'icon' => $this->icon,
             'name' => $this->title,
             'pid' => $this->pid,
-            'authority' => $this->roles->pluck('name')
+            'hideInMenu' => $this->is_show ? false :true,
+            'hideChildrenInMenu' => $this->is_show_children ? false:true,
+            'authority' => $this->when($this->roles->isNotEmpty(),$this->roles->pluck('name'))
         ];
     }
 
