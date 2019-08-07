@@ -139,11 +139,15 @@ class MenuController extends Controller
         if($request->has('roles')){
             $roles = $request->input('roles');
             $menu->roles()->sync($roles);
+        }else{
+            $menu->roles()->detach();
         }
         if($request->has('accesses')){
             $accesses = $request->input('accesses');
             $menu->accesses()->sync($accesses);
-        }        
+        }else{
+            $menu->accesses()->detach();
+        }
 
         $menu->save() ? tne('SUCCESS') : tne("FAIL");
     }
