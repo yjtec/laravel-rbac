@@ -18,11 +18,7 @@ class Rbac
 
         $action = $request->route()->getActionName();
         list($class,$method) = explode('@', $action);
-
         $module = str_replace('Controller','',substr(strrchr($class,'\\'),1));
-        
-        dd($method);
-
         return $next($request);
     }
 }

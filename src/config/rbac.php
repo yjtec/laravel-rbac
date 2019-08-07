@@ -1,5 +1,5 @@
 <?php 
 return [
-    'api_prefix' => '/api/admin',//接口地址前缀
+    'api_prefix' => '/admin/api',//接口地址前缀
 ];
 ?>

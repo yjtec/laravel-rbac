@@ -21,7 +21,7 @@ class StoreRequest extends Request
     public function rules()
     {
         return [
-            'account' => 'required|min:4|unique:users,account',
+            'account' => 'required|min:4|unique:rbac.users,account',
             'email'   => 'email|unique:users',
             'pwd'     => 'required|min:6',
             'roles'   => 'required',

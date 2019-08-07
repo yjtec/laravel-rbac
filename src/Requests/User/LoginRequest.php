@@ -44,8 +44,8 @@ class LoginRequest extends Request
     {
         //dd($this->input('account'));
         return [
-            'account' => 'required|exists:users',
-            'pwd' => 'required|pwd:users,account'
+            'account' => 'required|exists:rbac.users',
+            'pwd' => 'required|pwd:rbac.users,account'
         ];
     }
 

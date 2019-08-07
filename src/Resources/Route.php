@@ -22,7 +22,8 @@ class Route extends Resource
             'pid' => $this->pid,
             'hideInMenu' => $this->is_show ? false :true,
             'hideChildrenInMenu' => $this->is_show_children ? false:true,
-            'authority' => $this->when($this->roles->isNotEmpty(),$this->roles->pluck('name'))
+            'authority' => $this->when($this->roles->isNotEmpty(),$this->roles->pluck('name')),
+            'access' => $this->when($this->accesses->isNotEmpty(),$this->accesses->pluck('name'))
         ];
     }
 

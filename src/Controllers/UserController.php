@@ -7,7 +7,8 @@ use Yjtec\Rbac\Requests\User\LoginRequest;
 use Yjtec\Rbac\Requests\User\UpdateRequest;
 use Yjtec\Rbac\Controllers\Controller;
 use Yjtec\Rbac\Repositories\Contracts\UserInterface;
-
+use Illuminate\Support\Facades\Auth;
+use Yjtec\Rbac\Resources\LoginUser as LoginUserResource;
 class UserController extends Controller
 {
     public function __construct(UserInterface $repo){
@@ -226,5 +227,9 @@ class UserController extends Controller
         $type = $request->type;
         $keys = $request->key;
         $this->repo->$type(explode(',', $keys)) ? tne("SUCCESS") : tne("FAIL");
+    }
+
+    public function loginUser(){
+        return new LoginUserResource(Auth::guard('rbac')->user());
     }
 }

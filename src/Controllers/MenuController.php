@@ -62,7 +62,16 @@ class MenuController extends Controller
      *         name="roles[]",
      *         in="query",
      *         description="选择的角色ID",
-     *         required=true,
+     *         @OA\Schema(
+     *           type="array",
+     *           @OA\Items(type="string"),
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="accesses[]",
+     *         in="query",
+     *         description="权限ID",
      *         @OA\Schema(
      *           type="array",
      *           @OA\Items(type="string"),
@@ -83,6 +92,7 @@ class MenuController extends Controller
         $data = $request->only(['title','name','pid','icon','path','is_show','is_show_children','access_id']);
         $menu = $this->repo->add($data);
         $menu->roles()->attach($request->input('roles'));
+        $menu->accesses()->attach($request->input('accesses'));
         return $menu;
     }
 
@@ -98,7 +108,16 @@ class MenuController extends Controller
      *         name="roles[]",
      *         in="query",
      *         description="选择的角色ID",
-     *         required=true,
+     *         @OA\Schema(
+     *           type="array",
+     *           @OA\Items(type="string"),
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="accesses[]",
+     *         in="query",
+     *         description="权限ID",
      *         @OA\Schema(
      *           type="array",
      *           @OA\Items(type="string"),
@@ -120,7 +139,12 @@ class MenuController extends Controller
         if($request->has('roles')){
             $roles = $request->input('roles');
             $menu->roles()->sync($roles);
+        }
+        if($request->has('accesses')){
+            $accesses = $request->input('accesses');
+            $menu->accesses()->sync($accesses);
         }        
+
         $menu->save() ? tne('SUCCESS') : tne("FAIL");
     }
     /**
@@ -139,6 +163,7 @@ class MenuController extends Controller
      */
     public function show($menu){
         $menu->roles_ids = $menu->roles->pluck('id');
+        $menu->accesses_ids = $menu->accesses->pluck('id');
         return $menu;
     }
     /**
@@ -204,9 +229,5 @@ class MenuController extends Controller
         //$type = $request->input('type');
         $data = $this->repo->list([]);
         return RouteResource::collection($data);
-        //return \Yjtec\Support\Nested::unlimitedForlayer($data->toArray(),'routes');
-        
-        //return $data;
-        //return $this->repo->add($data);
     }
 }

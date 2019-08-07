@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AccessTableSeeder extends Seeder
+class RbacAccessTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
