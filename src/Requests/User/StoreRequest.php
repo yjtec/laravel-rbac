@@ -22,7 +22,7 @@ class StoreRequest extends Request
     {
         return [
             'account' => 'required|min:4|unique:rbac.users,account',
-            'email'   => 'email|unique:users',
+            'email'   => 'email|unique:rbac.users',
             'pwd'     => 'required|min:6',
             'roles'   => 'required',
             'avatar'  => 'required',

@@ -35,7 +35,7 @@ class UpdateRequest extends Request
             'email'     => [
                 'sometimes',
                 'email',
-                Rule::unique('users')->ignore($user->id),
+                Rule::unique('rbac.users')->ignore($user->id),
             ],
             'nick_name' => 'sometimes|min:4',
         ];
