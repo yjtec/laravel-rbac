@@ -21,11 +21,12 @@ class StoreRequest extends Request
     public function rules()
     {
         return [
-            'account' => 'required|min:4|unique:rbac.users,account',
-            'email'   => 'email|unique:rbac.users',
-            'pwd'     => 'required|min:6',
-            'roles'   => 'required',
-            'avatar'  => 'required',
+            'account'     => 'required|min:4|unique:rbac.users,account',
+            'email'       => 'email|unique:rbac.users',
+            'pwd'         => 'required|min:6',
+            'roles'       => 'required',
+            'avatar'      => 'sometimes',
+            'nick_name'   => 'required',
         ];
     }
     public function withValidator($validator)

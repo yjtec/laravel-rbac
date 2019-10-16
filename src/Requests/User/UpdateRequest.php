@@ -38,6 +38,7 @@ class UpdateRequest extends Request
                 Rule::unique('rbac.users')->ignore($user->id),
             ],
             'nick_name' => 'sometimes|min:4',
+            'status'    => 'sometimes|in:0,1',
         ];
     }
 

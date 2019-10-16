@@ -139,10 +139,9 @@ class UserController extends Controller
      * )
      */
     public function store(StoreRequest $request){
-        $data = $request->except('pwd');
+        $data = $request->except(['pwd','roles']);
         $user = $this->repo->add($data);
 
-        $token = str_random(60);
         $user->api_token = str_random(60);
         $user->save();
         $user->roles()->attach($request->input('roles'));
@@ -221,6 +220,29 @@ class UserController extends Controller
      */
     public function delete($user){
         $user->delete() ? tne('SUCCESS') : tne('FAIL');
+    }
+
+    /**
+     * @OA\get(
+     *     path="/user/change/{id}",
+     *     description="管理员状态",
+     *     tags={"User"},
+     *     summary="管理员状态",
+     *     operationId="ApiUserDelete",
+     *     @OA\Parameter(ref="#/components/parameters/id"),
+     *     @OA\Response(
+     *         response="200",
+     *         description="禁用/开启成功",
+     *     )
+     * )
+     */
+    public function changeStatus($user,UpdateRequest $request){
+        if(!$request->filled('status')){
+            tne('STATUS_NOT_NULL');
+        }
+        $status = $request->get('status');
+        $user->status = $status;
+        $user->save() ? tne('SUCCESS') : tne('FAIL');
     }
 
     public function mul(Request $request){
