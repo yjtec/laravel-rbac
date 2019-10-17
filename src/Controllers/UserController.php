@@ -2,6 +2,7 @@
 
 namespace Yjtec\Rbac\Controllers;
 use Illuminate\Http\Request;
+use Yjtec\Rbac\Requests\User\HeaderRequest;
 use Yjtec\Rbac\Requests\User\StoreRequest;
 use Yjtec\Rbac\Requests\User\LoginRequest;
 use Yjtec\Rbac\Requests\User\UpdateRequest;
@@ -9,10 +10,14 @@ use Yjtec\Rbac\Controllers\Controller;
 use Yjtec\Rbac\Repositories\Contracts\UserInterface;
 use Illuminate\Support\Facades\Auth;
 use Yjtec\Rbac\Resources\LoginUser as LoginUserResource;
+use App\Services\UploadService;
+
 class UserController extends Controller
 {
+    private $uploadService;
     public function __construct(UserInterface $repo){
         $this->repo = $repo;
+        $this->uploadService = new UploadService();
     }
     /**
      * @OA\Get(
@@ -97,10 +102,12 @@ class UserController extends Controller
         }
 
         if($request->has('stime')){
-            $where[] = ['created_at','>',$request->input('stime')];
+            $firstSeconds = date('Y-m-d H:i:s',strtotime(date($request->input('stime'))));
+            $where[] = ['created_at','>',$firstSeconds];
         }
         if($request->has('etime')){
-            $where[] = ['created_at','<=',$request->input('etime')];
+            $lastSeconds = date('Y-m-d H:i:s',strtotime("+1 days",strtotime($request->input('etime'))));
+            $where[] = ['created_at','<=',$lastSeconds];
         }
         $with = false;
         if($request->has('roles')){
@@ -182,8 +189,6 @@ class UserController extends Controller
             $user->roles()->sync($roles);
         }
         $user->save() ? tne('SUCCESS') : tne('FAIL');
-
-
     }
     /**
      * @OA\Get(
@@ -242,6 +247,28 @@ class UserController extends Controller
         }
         $status = $request->get('status');
         $user->status = $status;
+        $user->save() ? tne('SUCCESS') : tne('FAIL');
+    }
+
+    /**
+     * @OA\post(
+     *     path="/user/header/{id}",
+     *     description="上传/修改头像",
+     *     tags={"User"},
+     *     summary="上传/修改头像",
+     *     operationId="ApiUploadHeader",
+     *     @OA\Parameter(ref="#/components/parameters/id"),
+     *     @OA\Response(
+     *         response="200",
+     *         description="上传成功",
+     *     )
+     * )
+     */
+    public function headerImage($user, HeaderRequest $request){
+        $file = $request->file('avatar');
+        $res = $this->uploadService->upload($file,'/admin_image');
+        $user->avatar = $res['url'];
+
         $user->save() ? tne('SUCCESS') : tne('FAIL');
     }
 

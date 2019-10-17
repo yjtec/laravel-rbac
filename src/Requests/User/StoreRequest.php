@@ -24,9 +24,8 @@ class StoreRequest extends Request
             'account'     => 'required|min:4|unique:rbac.users,account',
             'email'       => 'email|unique:rbac.users',
             'pwd'         => 'required|min:6',
-            'roles'       => 'required',
-            'avatar'      => 'sometimes',
-            'nick_name'   => 'required',
+            'roles'       => 'required|exists:rbac.roles,id',
+            'nick_name'   => 'required|max:20',
         ];
     }
     public function withValidator($validator)
