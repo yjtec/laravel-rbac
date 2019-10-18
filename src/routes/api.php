@@ -27,7 +27,6 @@ Route::middleware(['rbac.token'])->group(function () {
     Route::delete('/user/{user}', 'UserController@delete');
     Route::get('/user/{user}', 'UserController@show');
     Route::get('/user/change/{user}', 'UserController@changeStatus');
-    Route::post('/user/header/{user}', 'UserController@headerImage');
     Route::put('/user/{user}', 'UserController@update');
     Route::get('/currentUser','UserController@loginUser');
 });

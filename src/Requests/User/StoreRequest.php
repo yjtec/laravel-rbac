@@ -26,6 +26,7 @@ class StoreRequest extends Request
             'pwd'         => 'required|min:6',
             'roles'       => 'required|exists:rbac.roles,id',
             'nick_name'   => 'required|max:20',
+            'avatar'      => 'sometimes',
         ];
     }
     public function withValidator($validator)

@@ -2,7 +2,6 @@
 
 namespace Yjtec\Rbac\Controllers;
 use Illuminate\Http\Request;
-use Yjtec\Rbac\Requests\User\HeaderRequest;
 use Yjtec\Rbac\Requests\User\StoreRequest;
 use Yjtec\Rbac\Requests\User\LoginRequest;
 use Yjtec\Rbac\Requests\User\UpdateRequest;
@@ -180,7 +179,7 @@ class UserController extends Controller
      * )
      */    
     public function update($user,UpdateRequest $request){
-        $data = $request->only(['email','nick_name','password','salt']);
+        $data = $request->only(['email','nick_name','avatar','password','salt']);
         foreach ($data as $k => $v) {
             $user->$k = $v;
         }
@@ -208,7 +207,8 @@ class UserController extends Controller
         $user->roles = $user->roles;
         return $user;
     }
-    
+
+
     /**
      * @OA\Delete(
      *     path="/user/{id}",
@@ -247,28 +247,6 @@ class UserController extends Controller
         }
         $status = $request->get('status');
         $user->status = $status;
-        $user->save() ? tne('SUCCESS') : tne('FAIL');
-    }
-
-    /**
-     * @OA\post(
-     *     path="/user/header/{id}",
-     *     description="上传/修改头像",
-     *     tags={"User"},
-     *     summary="上传/修改头像",
-     *     operationId="ApiUploadHeader",
-     *     @OA\Parameter(ref="#/components/parameters/id"),
-     *     @OA\Response(
-     *         response="200",
-     *         description="上传成功",
-     *     )
-     * )
-     */
-    public function headerImage($user, HeaderRequest $request){
-        $file = $request->file('avatar');
-        $res = $this->uploadService->upload($file,'/admin_image');
-        $user->avatar = $res['url'];
-
         $user->save() ? tne('SUCCESS') : tne('FAIL');
     }
 

@@ -39,6 +39,7 @@ class UpdateRequest extends Request
             ],
             'nick_name' => 'sometimes|min:4',
             'status'    => 'sometimes|in:0,1',
+            'avatar'    => 'sometimes',
         ];
     }
 
