@@ -149,9 +149,9 @@ class UserController extends Controller
         $user = $this->repo->add($data);
 
         $user->api_token = str_random(60);
-        $user->save();
+        $res = $user->save();
         $user->roles()->attach($request->input('roles'));
-        return $user;
+        $res ? tne('SUCCESS') : tne('FAIL');
     }
     /**
      * @OA\Put(
