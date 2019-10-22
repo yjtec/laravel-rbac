@@ -44,7 +44,13 @@ class LoginRequest extends Request
     {
         //dd($this->input('account'));
         return [
-            'account' => 'required|exists:rbac.users',
+            'account' => [
+                'required',
+                //'exists:rbac.users',
+                Rule::exists('rbac.users')->where(function ($query) {
+                    $query->whereNull('deleted_at');
+                }),
+            ],
             'pwd' => 'required|pwd:rbac.users,account'
         ];
     }
