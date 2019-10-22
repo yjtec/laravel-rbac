@@ -33,11 +33,11 @@ class UpdateRequest extends Request
         $user = $this->route('user');
         return [
             'email'     => [
-                'sometimes',
+                'required',
                 'email',
                 Rule::unique('rbac.users')->ignore($user->id),
             ],
-            'nick_name' => 'sometimes|min:4',
+            'nick_name' => 'sometimes|min:4|max:20',
             'status'    => 'sometimes|in:0,1',
             'avatar'    => 'sometimes',
         ];
