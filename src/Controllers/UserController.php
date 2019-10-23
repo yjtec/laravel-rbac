@@ -9,14 +9,10 @@ use Yjtec\Rbac\Controllers\Controller;
 use Yjtec\Rbac\Repositories\Contracts\UserInterface;
 use Illuminate\Support\Facades\Auth;
 use Yjtec\Rbac\Resources\LoginUser as LoginUserResource;
-use App\Services\UploadService;
-
 class UserController extends Controller
 {
-    private $uploadService;
     public function __construct(UserInterface $repo){
         $this->repo = $repo;
-        $this->uploadService = new UploadService();
     }
     /**
      * @OA\Get(
