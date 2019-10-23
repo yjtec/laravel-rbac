@@ -20,9 +20,9 @@ class RbacServiceProvider extends ServiceProvider
             __DIR__ . '/../database/seeds/'      => database_path('seeds'),
             __DIR__ . '/../config/rbac.php'      => config_path('rbac.php'),
         ]);
-
+        
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/auth.php', 'auth'
+            __DIR__. '/../config/config.php','rbac'
         );
     }
 

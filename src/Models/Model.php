@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 
 class Model extends BaseModel
 {
-    protected $connection = 'rbac';
+    public function __construct(){
+        $this->setConnection(config('rbac.connection','rbac'));
+    }
+    //protected $connection = config('rbac.connection','rbac');
 }

@@ -21,10 +21,10 @@ class StoreRequest extends Request
     public function rules()
     {
         return [
-            'account'     => 'required|min:4|unique:rbac.users,account',
-            'email'       => 'required|email|unique:rbac.users',
+            'account'     => 'required|min:4|unique:'.config('rbac.connection').'.users,account',
+            'email'       => 'required|email|unique:'.config('rbac.connection').'.users',
             'pwd'         => 'required|min:6',
-            'roles'       => 'required|exists:rbac.roles,id',
+            'roles'       => 'required|exists:'.config('rbac.connection').'.roles,id',
             'nick_name'   => 'required|min:4|max:20',
             'avatar'      => 'sometimes',
         ];

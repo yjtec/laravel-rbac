@@ -2,9 +2,8 @@
 
 namespace Yjtec\Rbac\Requests\User;
 
-use App\Rules\Pwd;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+
 /**
  * @OA\RequestBody(
  *   request="LoginUser",
@@ -34,7 +33,7 @@ class LoginRequest extends Request
     // public function authorize()
     // {
     //     return Auth::attempt(['account'=>'admin1','sdf'=>'123']);
-    // }    
+    // }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -47,11 +46,11 @@ class LoginRequest extends Request
             'account' => [
                 'required',
                 //'exists:rbac.users',
-                Rule::exists('rbac.users')->where(function ($query) {
+                Rule::exists(config('rbac.connection') . '.users')->where(function ($query) {
                     $query->whereNull('deleted_at');
                 }),
             ],
-            'pwd' => 'required|pwd:rbac.users,account'
+            'pwd'     => 'required|pwd:' . config('rbac.connection') . '.users,account',
         ];
     }
 
@@ -59,6 +58,7 @@ class LoginRequest extends Request
     {
         return [
             'account.exists' => '账号不存在！',
+            'pwd.pwd'        => '密码错误',
         ];
     }
 
@@ -67,9 +67,9 @@ class LoginRequest extends Request
         $validator->after(function ($validator) {
             if (empty($validator->errors()->all())) {
                 $userRepo = resolve('Yjtec\Rbac\Repositories\Contracts\UserInterface');
-                $user = $userRepo->findByField('account',$this->input('account'));
-                $this->merge(['user'=>$user]);
+                $user     = $userRepo->findByField('account', $this->input('account'));
+                $this->merge(['user' => $user]);
             }
         });
-    }    
+    }
 }

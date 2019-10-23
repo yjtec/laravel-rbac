@@ -10,14 +10,11 @@ class User extends Model
     protected $fillable = ['account', 'email', 'password', 'nick_name', 'salt', 'avatar'];
     protected $hidden = ['password','salt','remember_token'];
     protected $appends = ['avatar_url'];
-    // public function setAccountAttribute($value)
-    // {
-    //     $this->attributes['password'] = '123456';
-    //     $this->attributes['salt']     = '123456';
-    //     $this->attributes['account']  = $value;
-    // }
     public function getAvatarUrlAttribute(){
         $avatar = $this->attributes['avatar'];
+        if($file = config('rbac.file')){ 
+            return $this->attributes['avatar_url'] = $file::url($avatar);
+        };
         return $this->attributes['avatar_url'] = \Storage::url($avatar);
     }
 

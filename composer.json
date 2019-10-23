@@ -8,7 +8,9 @@
     "email": "723616880@qq.com"
   }],
   "minimum-stability": "dev",
-  "require": {},
+  "require": {
+    "yjtec/laravel-pwd": "^1.0"
+  },
   "autoload": {
     "psr-4": {
       "Yjtec\\Rbac\\": "src/"

@@ -1,5 +1,5 @@
 <?php
-Route::middleware(['rbac.token'])->group(function () {
+Route::middleware(config('rbac.middleware',[]))->group(function () {
     Route::get('/role', 'RoleController@role'); //角色列表
     Route::post('/role', 'RoleController@store'); //新增角色
     Route::get('/role/{role}', 'RoleController@show'); //获取当前角色
