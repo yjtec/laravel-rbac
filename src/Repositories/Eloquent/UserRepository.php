@@ -3,7 +3,6 @@ namespace Yjtec\Rbac\Repositories\Eloquent;
 
 use Yjtec\Rbac\Models\User;
 use Yjtec\Rbac\Repositories\Contracts\UserInterface;
-use Yjtec\Repo\Repository;
 use DB;
 class UserRepository extends Repository implements UserInterface
 {

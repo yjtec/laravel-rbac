@@ -3,7 +3,6 @@ namespace Yjtec\Rbac\Repositories\Eloquent;
 
 use Yjtec\Rbac\Models\Access;
 use Yjtec\Rbac\Repositories\Contracts\AccessInterface;
-use Yjtec\Repo\Repository;
 class AccessRepository extends Repository implements AccessInterface
 {
     
