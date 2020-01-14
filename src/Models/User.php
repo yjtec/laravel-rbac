@@ -27,6 +27,9 @@ class User extends Model
         foreach($this->roles as $role){
             $re = array_merge($re,$role->side_menu);
         }
-        return collect($re)->unique('id')->toArray();
+        // $re = collect($re)->unique('id');
+        // $re = $re->sortBy('id');
+        // return $re->values()->all();
+        return collect($re)->unique('id')->sortBy('id')->values()->all();
     }
 }
