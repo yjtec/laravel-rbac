@@ -13,4 +13,12 @@ class Menu extends Model
     {
         return $this->belongsToMany('Yjtec\Rbac\Models\Access', 'menu_access');
     }
+
+    public function parent(){
+        return $this->belongsTo('Yjtec\Rbac\Models\Menu','pid');
+    }
+    
+    public function children(){
+        return $this->hasMany('Yjtec\Rbac\Models\Menu','pid');
+    }
 }

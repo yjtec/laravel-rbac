@@ -21,4 +21,12 @@ class User extends Model
     public function roles(){
         return $this->belongsToMany('Yjtec\Rbac\Models\Role','user_role');
     }
+
+    public function getSidemenuAttribute(){
+        $re = [];
+        foreach($this->roles as $role){
+            $re = array_merge($re,$role->side_menu);
+        }
+        return collect($re)->unique('id')->toArray();
+    }
 }

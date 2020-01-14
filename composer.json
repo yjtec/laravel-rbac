@@ -7,9 +7,10 @@
     "name": "kidkang",
     "email": "723616880@qq.com"
   }],
-  "minimum-stability": "dev",
+  "minimum-stability": "dev-master",
   "require": {
-    "yjtec/laravel-pwd": "^1.0"
+    "yjtec/laravel-pwd": "^1.0",
+    "yjtec/support": "1.0.*"
   },
   "autoload": {
     "psr-4": {

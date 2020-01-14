@@ -19,8 +19,8 @@ class StoreRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:4|max:10',
-            'name' => 'required|min:4|max:25',
+            'title' => 'required|min:2|max:10',
+            'name' => 'required|min:2|max:25',
             'pid' => 'sometimes|numeric'
         ];
     }
