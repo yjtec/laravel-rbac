@@ -87,6 +87,7 @@ class RoleController extends Controller
      */
     public function store(StoreRequest $request){
         $data = $request->only(['title','name','pid','app_id','remark']);
+        $this->roleRepo->add($data);
         tne('SUCCESS');
         //return $this->roleRepo->add($data);
     }
