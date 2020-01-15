@@ -1,8 +1,10 @@
 <?php
 namespace Yjtec\Rbac\Requests\Role;
+
 use Yjtec\Rbac\Requests\ApiRequest;
 
-class Request extends ApiRequest{
+class Request extends ApiRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -18,11 +20,13 @@ class Request extends ApiRequest{
      *
      * @return array
      */
-    public function attributes(){
+    public function attributes()
+    {
         return [
-            'title' => '角色名称',
-            'name' => '标识',
-            'pid' => '父级ID'
+            'title'  => '角色名称',
+            'name'   => '标识',
+            'pid'    => '父级ID',
+            'remark' => '描述',
         ];
     }
 }
