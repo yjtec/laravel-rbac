@@ -19,11 +19,12 @@ class Request extends ApiRequest
     public function attributes()
     {
         return [
-            'account' => '账号',
-            'email'   => '邮箱',
-            'pwd'     => '密码',
-            'role'    => '角色',
-            'avatar'  => '头像',
+            'account'   => '账号',
+            'nick_name' => '昵称',
+            'email'     => '邮箱',
+            'pwd'       => '密码',
+            'role'      => '角色',
+            'avatar'    => '头像',
         ];
     }
 
