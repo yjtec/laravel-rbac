@@ -93,7 +93,8 @@ class MenuController extends Controller
         $menu = $this->repo->add($data);
         $menu->roles()->attach($request->input('roles'));
         $menu->accesses()->attach($request->input('accesses'));
-        return $menu;
+        tne('SUCCESS');
+        //return $menu;
     }
 
     /**
